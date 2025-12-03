@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import ProductModal from './components/ProductModal';
@@ -16,13 +16,13 @@ export default function App() {
 
     // Initial Load
     useEffect(() => {
-        fetch('http://localhost:5001/api/products')
+        fetch(`${API_URL}/api/products`)
             .then(res => res.json())
             .then(data => {
                 console.log("DB Data:", data);
                 const formatted = data.map(item => ({
                     ...item,
-                    imageUrl: `http://localhost:5001${item.img}`,
+                    imageUrl: `${API_URL}${item.img}`,
                     description: item.desc
                 }));
                 setProducts(formatted);
@@ -106,7 +106,7 @@ export default function App() {
                 onAdd={addToCart} 
             />
 
-            <CheckoutModal 
+            <CheckoutModal
                 isOpen={isCheckoutOpen} 
                 onClose={() => setIsCheckoutOpen(false)} 
                 total={cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)}
