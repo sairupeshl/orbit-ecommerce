@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+const API_URL = 'https://orbit-backend.onrender.com';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import ProductModal from './components/ProductModal';
